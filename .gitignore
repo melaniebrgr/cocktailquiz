@@ -1,0 +1,7 @@
+quiz.sublime-project
+quiz.sublime-workspace
+config.codekit
+mockup/*.sketch
+js/cocktails.json
+js/min/
+bower_components/
