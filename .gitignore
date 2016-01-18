@@ -5,3 +5,4 @@ mockup/*.sketch
 js/cocktails.json
 js/min/
 bower_components/
+css/.sass-cache/
