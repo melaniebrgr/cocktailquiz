@@ -5,7 +5,14 @@ function Cocktail( name, ingredients, recipeURL ) {
 }
 Cocktail.prototype.hasIngredients = function hasIngredients( userIngredients ) {
 	//check if userIngredients match this cocktail ingredients
-}
+};
+Cocktail.prototype.makIngredList = function makIngredList( ingredList ) {
+	var ingredList = ingredList || [];
+	this.ingredients.forEach(function(el) {
+		ingredList.push( el.ingredient );
+	});
+	return ingredList;
+};
 
 var oldFashioned = new Cocktail("Old Fashioned", [
 	{ amount: "2 oz", ingredient: "bourbon" },
@@ -59,7 +66,7 @@ var french75 = new Cocktail("French 75", [
 	{ amount: "2 oz", ingredient: "gin" },
 	{ amount: "1 oz", ingredient: "lemon juice" },
 	{ amount: "2 tsp", ingredient: "sugar" },
-	{ amount: "", ingredient: "sparkling wine" }]
+	{ amount: "", ingredient: "sparkling wine" }],
 	"http://www.seriouseats.com/recipes/2011/03/french-75-cocktial-gin-champagne-lemon.html");
 
 var bloodyMary = new Cocktail("Blood Mary", [
