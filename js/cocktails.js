@@ -6,7 +6,7 @@ function Cocktail( name, ingredients, recipeURL ) {
 Cocktail.prototype.hasIngredients = function hasIngredients( userIngredients ) {
 	//check if userIngredients match this cocktail ingredients
 };
-Cocktail.prototype.makIngredList = function makIngredList( ingredList ) {
+Cocktail.prototype.makeIngredList = function makeIngredList( ingredList ) {
 	var ingredList = ingredList || [];
 	this.ingredients.forEach(function(el) {
 		ingredList.push( el.ingredient );
@@ -121,12 +121,13 @@ var sazerac = new Cocktail("Sazerac", [
 
 var vieuxCarre = new Cocktail("Vieux Carre", [
 	{ amount: "0.5 tsp", ingredient: "Benedictine" },
-	{ amount: "1 dash", ingredient: "Peychaud's Bitters" },
-	{ amount: "1 dash", ingredient: "Angostura Bitters" },
+	{ amount: "1 dash", ingredient: "Peychaud's bitters" },
+	{ amount: "1 dash", ingredient: "Angostura bitters" },
 	{ amount: "0.75 oz", ingredient: "rye whiskey" },
 	{ amount: "0.75 oz", ingredient: "cognac" },
 	{ amount: "0.75 oz", ingredient: "sweet vermouth" }],
 	"http://www.seriouseats.com/recipes/2008/07/vieux-carre-recipe.html");
+
 var ramosFizz = new Cocktail("Ramos Fizz",[
 	{ amount: "2 oz", ingredient: "gin" },
 	{ amount: "1 oz", ingredient: "cream" },
@@ -173,7 +174,7 @@ var cosmopolitan = new Cocktail("Cosmopolitan", [
 	{ amount: "0.5 oz", ingredient: "triple sec" },
 	{ amount: "0.5 oz", ingredient: "cranberry juice" },
 	{ amount: "0.25 oz", ingredient: "lime juice" },
-	{ amount: "", ingredient: "ornage twist" }],
+	{ amount: "", ingredient: "orange twist" }],
 	"http://www.seriouseats.com/recipes/2011/10/how-to-make-a-cosmopolitan-cocktail-best-recipe.html");
 
 var piscoSour = new Cocktail("Pisco Sour", [

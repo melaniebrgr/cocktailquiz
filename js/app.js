@@ -1,15 +1,38 @@
-var APP = {};
+var APP = APP || {};
 
-APP.general = (function(APP) {
-	var app = APP || {};
+APP.util = function( $ ) {
+
+	function publicUniq( inputArr ) {
+	    var resultArr = [];
+	    $.each(inputArr, function(i, el) {
+	        if ($.inArray(el, resultArr) == -1) resultArr.push(el);
+	    });
+	    return resultArr;
+	}
+
+	return {
+		uniq: publicUniq
+	};
+
+}( jQuery );
 
 
+APP.load = function() {
+
+	function publicListIngredients( cocktails ) {
+		var ingredList = [];
+		cocktails.forEach(function(el) {
+			ingredList = el.makeIngredList( ingredList );
+		});
+		return APP.util.uniq( ingredList ).sort();
+	}
 	
 	return {
-		//public methods
+		listIngredients: publicListIngredients
 	};
-})(APP);
+	
+}();
 
 $(document).ready(function() {
-	//ready
+	//do something
 });
