@@ -72,5 +72,4 @@ APP.load = function( cocktails  ) {
 $(document).ready(function() {
 	APP.load.createIngredButtons();
 	APP.load.pickCocktail();
-	log(APP.load.getSelectedCocktail());
 });

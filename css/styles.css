@@ -352,3 +352,62 @@ table {
 td,
 th {
   padding: 0; }
+
+button {
+  border: #fff 1px solid;
+  border-radius: 6px;
+  background-color: transparent;
+  height: 2.25em;
+  margin: 0.375em;
+  padding-left: 1.5em;
+  padding-right: 1.5em; }
+
+button:hover {
+  background-color: white;
+  color: #a24bcf; }
+
+*, *:before, *:after {
+  box-sizing: border-box; }
+
+html, body {
+  height: 100%;
+  font: "Avenir Next", "Avenir", 'Nunito', sans-serif;
+  color: white; }
+
+.container--theme1, .container {
+  -webkit-animation: animateLinearGradient 30s ease infinite;
+          animation: animateLinearGradient 30s ease infinite;
+  background: -webkit-linear-gradient(220deg, #4bcf93, #4b79cf, #a24bcf);
+  background: linear-gradient(230deg, #4bcf93, #4b79cf, #a24bcf);
+  background-size: 400% 400%; }
+@-webkit-keyframes animateLinearGradient {
+  0% {
+    background-position: 0% 50%; }
+  50% {
+    background-position: 100% 50%; }
+  100% {
+    background-position: 0% 50%; } }
+@keyframes animateLinearGradient {
+  0% {
+    background-position: 0% 50%; }
+  50% {
+    background-position: 100% 50%; }
+  100% {
+    background-position: 0% 50%; } }
+.container {
+  width: 100%;
+  height: 100%; }
+
+.quiz {
+  display: inline-block;
+  margin-right: -4px;
+  padding: 1.5em;
+  vertical-align: middle;
+  width: 33.33%; }
+
+.answers {
+  display: inline-block;
+  margin-right: -4px;
+  padding: 1.5em;
+  vertical-align: middle;
+  width: 66.66%; }
