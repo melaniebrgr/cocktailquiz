@@ -73,7 +73,7 @@ var bloodyMary = new Cocktail("Blood Mary", [
 	{ amount: "1 tbsp", ingredient: "celery salt" },
 	{ amount: "2 wedges", ingredient: "lemon" },
 	{ amount: "0.5 tsp", ingredient: "Worcestershire sauce" },
-	{ amount: "0.25 tsp", ingredient: "soy sauce" },
+	{ amount: "0.25 tsp", ingredient: "soya sauce" },
 	{ amount: "0.5 tsp", ingredient: "black pepper" },
 	{ amount: "0.25 tsp", ingredient: "hot sauce" },
 	{ amount: "0.5 tsp", ingredient: "horseradish" },

@@ -20,13 +20,15 @@ APP.util = function( $ ) {
 
 	return {
 		uniq: publicUniq,
-		ranElement: publicRanIndex
+		ranIndex: publicRanIndex
 	};
 
 }( jQuery );
 
 
-APP.load = function() {
+APP.load = function( cocktails  ) {
+	var cocktailsInGame = cocktails;
+	var selectedCocktail;
 
 	function listIngredients( cocktailsArr ) {
 		var ingredList = [];
@@ -45,16 +47,30 @@ APP.load = function() {
 		});
 	}
 
-	// function setCocktailName() {
-		
-	// }
+	function newCocktail( cocktailsInGame ) {
+		var index = APP.util.ranIndex( cocktailsInGame );
+		return cocktailsInGame.splice( index, 1 );
+	}
+
+	function publicPickCocktail() {
+		selectedCocktail = newCocktail( cocktailsInGame )[0];
+		$('.mix-info .cocktail-name').text( selectedCocktail.name );
+	}
+
+	function publicGetSelectedCocktail() {
+		return selectedCocktail;
+	}
 	
 	return {
-		createIngredButtons: publicCreateIngredButtons
+		createIngredButtons: publicCreateIngredButtons,
+		pickCocktail: publicPickCocktail,
+		getSelectedCocktail: publicGetSelectedCocktail
 	};
 	
-}();
+}( cocktails );
 
 $(document).ready(function() {
 	APP.load.createIngredButtons();
+	APP.load.pickCocktail();
+	log(APP.load.getSelectedCocktail());
 });
