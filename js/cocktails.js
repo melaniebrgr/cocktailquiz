@@ -112,7 +112,7 @@ var boulevardier = new Cocktail("Boulevardier", [
 
 var sazerac = new Cocktail("Sazerac", [
 	{ amount: "1 tsp", ingredient: "sugar" },
-	{ amount: "3 dashes", ingredient: "Peychaud's Bitters" },
+	{ amount: "3 dashes", ingredient: "Peychaud's bitters" },
 	{ amount: "3 drops", ingredient: "water" },
 	{ amount: "2 oz", ingredient: "rye whiskey" },
 	{ amount: "1 tsp", ingredient: "Herbsaint" },
@@ -170,7 +170,7 @@ var plantersPunch = new Cocktail("Planter's Punch", [
 
 var cosmopolitan = new Cocktail("Cosmopolitan", [
 	{ amount: "", ingredient: "ice" },
-	{ amount: "1.5 oz", ingredient: "citrus-flavored vodka" },
+	{ amount: "1.5 oz", ingredient: "vodka" },
 	{ amount: "0.5 oz", ingredient: "triple sec" },
 	{ amount: "0.5 oz", ingredient: "cranberry juice" },
 	{ amount: "0.25 oz", ingredient: "lime juice" },
