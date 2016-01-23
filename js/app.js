@@ -38,11 +38,23 @@ APP.load = function( cocktails  ) {
 		return APP.util.uniq( ingredList ).sort();
 	}
 
+	function handleIngredButtonClick() {
+		//on click get the text of the button
+		//add the text to ul.cocktail-ingredients
+		//on additional click, remove from
+		var $button = $(this);
+		var ingredient = $button.text();
+		var $cocktailIngredUL = $('.mix-info .cocktail-ingredients');
+		$cocktailIngredUL.append('<li>' + ingredient + '</li>');
+		$button.addClass('is-active');
+	}
+
 	function publicCreateIngredButtons() {
 		var ingredients = listIngredients( cocktails );
 		var $answersSection = $('.answers');
 		ingredients.forEach(function(el) {
 			var $button = $("<button>" + el + "</button>");
+			$button.click( handleIngredButtonClick );
 			$answersSection.append($button);
 		});
 	}

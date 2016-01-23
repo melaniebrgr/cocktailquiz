@@ -5,9 +5,10 @@ $white: #fff;
 //mixins
 @mixin answerQuizShared {
 	display: inline-block;
+	height: 100%;
 	margin-right: -4px;
 	padding: em(24px);
-	vertical-align: middle;
+	vertical-align: top;
 }
 
 //functions
@@ -26,8 +27,15 @@ button {
 	margin: em(6px);
 	padding-left: em(24px);
 	padding-right: em(24px);
+
+	&:hover {
+		background-color: white;
+		color: rgb(162, 75, 207);
+	}
+
+
 }
-button:hover {
-	background-color: white;
-	color: rgb(162, 75, 207);
-}
+	.is-active {
+		background-color: white;
+		color: rgb(162, 75, 207);
+	}

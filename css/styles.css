@@ -361,8 +361,11 @@ button {
   margin: 0.375em;
   padding-left: 1.5em;
   padding-right: 1.5em; }
+  button:hover {
+    background-color: white;
+    color: #a24bcf; }
 
-button:hover {
+.is-active {
   background-color: white;
   color: #a24bcf; }
 
@@ -400,14 +403,16 @@ html, body {
 
 .quiz {
   display: inline-block;
+  height: 100%;
   margin-right: -4px;
   padding: 1.5em;
-  vertical-align: middle;
+  vertical-align: top;
   width: 33.33%; }
 
 .answers {
   display: inline-block;
+  height: 100%;
   margin-right: -4px;
   padding: 1.5em;
-  vertical-align: middle;
+  vertical-align: top;
   width: 66.66%; }
