@@ -34,8 +34,14 @@ APP.handle = function () {
 		var $button = $(this), 
 			ingredient = $button.text(),
 			$cocktailIngredUL = $('.mix-info .cocktail-ingredients');
-		$cocktailIngredUL.append('<li>' + ingredient + '</li>');
-		$button.addClass('is-active');
+
+		if ( !$button.hasClass('is-active') ) {	
+			$cocktailIngredUL.append('<li>' + ingredient + '</li>');
+			$button.addClass('is-active');
+		} else {
+			$cocktailIngredUL.find( "li:contains('" + ingredient + "')" ).remove();
+			$button.removeClass('is-active');
+		}
 	}
 
 	function publicMixButtonClick() {
@@ -85,7 +91,7 @@ APP.load = function ( cocktails  ) {
 		var ingredients = listIngredients( cocktails ),
 			$answersSection = $('.answers');
 		ingredients.forEach(function(el) {
-			var $button = $("<button>" + el + "</button>"); //button constructor??
+			var $button = $("<button>" + el + "</button>");
 			$button.click( APP.handle.ingredButtonClick );
 			$answersSection.append($button);
 		});

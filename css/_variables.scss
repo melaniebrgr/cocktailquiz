@@ -29,7 +29,9 @@ button {
 	padding-right: em(24px);
 
 	&:hover {
-		background-color: white;
+		// -webkit-text-fill-color: transparent; 
+		// -webkit-background-clip: text;
+		background: white;
 		color: rgb(162, 75, 207);
 	}
 
