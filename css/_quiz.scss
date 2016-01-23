@@ -1,4 +1,5 @@
 .quiz {
-	@include answerQuizShared;
-	width: 33.33%;
+	padding: em(24px);
+	width: 28%;
+	height: 100%;
 }

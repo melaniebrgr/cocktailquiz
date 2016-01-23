@@ -1,9 +1,20 @@
-*, *:before, *:after {
+* {
 	box-sizing: border-box;
+	&:before, &:after {
+		box-sizing: border-box;
+	}
+	&:focus {
+	    outline: none;
+	}
 }
 
 html, body {
 	height: 100%;
 	font: "Avenir Next", "Avenir", 'Nunito', sans-serif;
 	color: white;
+}
+
+body {
+	background: linear-gradient(230deg, rgb(75, 207, 147), rgb(75, 121, 207), rgb(162, 75, 207));
+	background-size: 400% 400%;
 }

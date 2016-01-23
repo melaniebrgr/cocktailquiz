@@ -1,18 +1,21 @@
 .container--theme1 {
 	//http://www.gradient-animator.com/
-	animation: animateLinearGradient 30s ease infinite;
-	background: linear-gradient(230deg, rgb(75, 207, 147), rgb(75, 121, 207), rgb(162, 75, 207));
-	background-size: 400% 400%;
+	// animation: animateLinearGradient 30s ease infinite;
+	// background: linear-gradient(230deg, rgb(75, 207, 147), rgb(75, 121, 207), rgb(162, 75, 207));
+	// background-size: 400% 400%;
 
-	@keyframes animateLinearGradient { 
-	    0%{background-position:0% 50%}
-	    50%{background-position:100% 50%}
-	    100%{background-position:0% 50%}
-	}
+	// @keyframes animateLinearGradient { 
+	//     0%{background-position:0% 50%}
+	//     50%{background-position:100% 50%}
+	//     100%{background-position:0% 50%}
+	// }
 }
 
 .container {
-	@extend .container--theme1;
+	// @extend .container--theme1;
+	display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
 	width: 100%;
 	height: 100%;
 }

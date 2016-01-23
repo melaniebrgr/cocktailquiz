@@ -2,7 +2,13 @@
 //for radial gradient
 //background-image: radial-gradient(right, #f2f2f2, #ffffff 80%); 
 .answers {
-	@include answerQuizShared;
-	// display: flex;
-	width: 66.66%;
+	padding: em(24px);
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	align-items: center;
+	align-content: center;
+	width: 72%;
+	height: 100%;
 }
