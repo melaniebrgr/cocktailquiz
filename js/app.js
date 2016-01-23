@@ -39,7 +39,8 @@ APP.handle = function () {
 			$cocktailIngredUL.append('<li>' + ingredient + '</li>');
 			$button.addClass('is-active');
 		} else {
-			$cocktailIngredUL.find( "li:contains('" + ingredient + "')" ).remove();
+			log(ingredient);
+			$cocktailIngredUL.find( 'li:contains("' + ingredient + '")' ).remove();
 			$button.removeClass('is-active');
 		}
 	}
