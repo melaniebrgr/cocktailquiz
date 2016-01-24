@@ -1,0 +1,40 @@
+.score--theme1 {
+	border: 1px solid $white;
+	border-radius: 50%;
+
+	span {
+		span.correct-ans, span.total-ques {
+			font-size: em(20px);
+			font-weight: 400;
+		}
+	}
+}
+
+.score {
+	@extend .score--theme1;
+
+	display: flex;
+	flex-flow: row wrap;
+	float: right;
+	height: em(100px);
+	transform: rotate(-45deg);
+	width: em(100px);
+
+	> span {
+		align-items: center;
+		display: flex;
+		height: 50%;
+		justify-content: center;
+		min-width: 100%;
+		
+		&:first-child {
+			border-bottom: 1px solid $white;
+		}
+	}
+
+	span {
+		span.correct-ans, span.total-ques {
+			transform: rotate(45deg);
+		}
+	}
+}

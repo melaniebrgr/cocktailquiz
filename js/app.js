@@ -177,7 +177,7 @@ APP.load = function ( cocktails  ) {
 
 	function publicPickCocktail() {
 		selectedCocktail = newCocktail( cocktailsInGame )[0];
-		$('.mix-info .cocktail-name').text( selectedCocktail.name );
+		$('.quiz__mix-info .cocktail-name').text( selectedCocktail.name );
 	}
 
 	function publicGetSelectedCocktail() {

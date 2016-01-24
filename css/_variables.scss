@@ -1,6 +1,7 @@
 //variables
 $browser-context: 16px;
 $white: #fff;
+$black: #000;
 
 //functions
 @function em($px, $context: $browser-context) {
