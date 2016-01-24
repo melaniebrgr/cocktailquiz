@@ -25,7 +25,7 @@ APP.util = function( $ ) {
 
 }( jQuery );
 
-APP.handle = function () {
+APP.handle = function( $ ) {
 
 	function publicIngredButtonClick() {
 		//on click get the text of the button
@@ -39,42 +39,102 @@ APP.handle = function () {
 			$cocktailIngredUL.append('<li>' + ingredient + '</li>');
 			$button.addClass('is-active');
 		} else {
-			log(ingredient);
 			$cocktailIngredUL.find( 'li:contains("' + ingredient + '")' ).remove();
 			$button.removeClass('is-active');
 		}
 	}
 
+	function getAmounts() {
+		return " Amounts here";
+	}
+
+	function createIngredStr( ingreds ) {
+		var str = "";
+		
+		if ( ingreds.length === 1 ) {
+			str = " " + ingreds[0];
+			return str;
+		}
+
+		ingreds.forEach(function(el, i) {
+			if ( i === ingreds.length - 1 ) { 
+				str += " and " + el;
+			} else {
+				str += " " + el + ",";
+			}
+		});
+		return str;
+	}
+
+	function createFeedback( result ) {
+		// If incorrect:
+		// 	which ingredients are correct, if any
+		// 	which are incorrect, if any
+		// 	if there are too many
+		// 	if there are too few
+		// If correct:
+		// 	congratulations, the amounts for each ingredient, and the url for more information
+
+		//no ingredients selected
+		if ( result.correctGuesses.length === 0 && result.incorrectGuesses.length === 0 ) {
+			return "Anyone can mix Nitrogen, Oxygen, and Argon, but air won't get you drunk – why not pick some ingredients?";
+
+		//the right number of ingredients and all the right ones
+		} else if ( result.diff === 0 && result.incorrectGuesses.length === 0 ) { 
+			return "Good mixing! You're a bartender in the making!" + getAmounts();
+
+		//the right number of ingredients but none of the right ones
+		} else if ( result.diff === 0 && result.correctGuesses.length === 0 ) {
+			return "You'd really drink this? You've got the right number of ingredients, but none of the right ones.";
+
+		//the right number of ingredients and some of the right ones
+		} else if ( result.diff === 0 && result.correctGuesses.length > 0 ) { 
+			return "You've got the right number of ingredients, but not all the right ones. You might want to skip the" + createIngredStr(result.incorrectGuesses) + " Ew.";
+
+		//too many ingredients and none of the right ones	
+		} else if ( result.diff > 0 && result.correctGuesses.length === 0 ) {
+			return "What is this witches brew? Not only do you have " + result.diff + " too many ingredients, but none of them are in this cocktail.";
+
+		//too many ingredients but some are the right ones	
+		} else if ( result.diff > 0 && result.correctGuesses.length > 0 ) {
+			return "Not bad. You have " + result.diff + " too many ingredients, but at least you got the" + createIngredStr(result.correctGuesses) + " right.";
+
+		//too few ingredients and none are the right ones
+		} else if ( result.diff < 0 && result.correctGuesses.length === 0 ) {
+			return "It's missing, well, everything. You have " + Math.abs(result.diff) + " too few ingredients, and none of the ones you've picked are in this cocktail.";
+		
+		//too few ingredients but some are the right ones
+		} else if ( result.diff < 0 && result.correctGuesses.length > 0 ) {
+			return "Close. You have " + Math.abs(result.diff) + " too few ingredients but at least you got the" + createIngredStr(result.correctGuesses) + " right.";
+		}
+	}
+
 	function publicMixButtonClick() {
-		//get the ingredients of the selected cocktail
+		//get the selected cocktail
 		//get user selected ingredients
 		//compare ingredients of selected cocktail with user's
-		//I want to provide user feedback
-		//If incorrect:
-			//which ingredients are correct, if any
-			//which are incorrect, if any
-			//if there are too many
-			//if there are too few
-		//If correct:
-			//congratulations, the amounts for each ingredient, and the url for more information
-			//increment score
-			//remove cocktails from questions array
-			//turn Mix button into new drink button
-		var selectedCocktail = APP.load.getSelectedCocktail(),
-			selectedIngreds = [],
-			userIngreds = [];
-		selectedCocktail.ingredients.forEach(function(el) {
-			selectedIngreds.push(el.ingredient);
+		//get user feedback
+		//display user feedback
+
+		var quizCocktail = APP.load.getSelectedCocktail(),
+			userIngreds = [],
+			result,
+			feedback;
+
+		$('.cocktail-ingredients li').each(function(i, el) {
+			userIngreds.push( $(el).text() );
 		});
-		// $('.cocktail-ingredients li').each();
-		log( selectedIngreds );
+
+		result = quizCocktail.getResult( userIngreds );
+		feedback = createFeedback( result );
+		$('.cocktail-feedback').removeClass('is-hidden').text(feedback);
 	}
 
 	return {
 		ingredButtonClick: publicIngredButtonClick,
 		mixButtonClick: publicMixButtonClick
 	};
-}();
+}( jQuery );
 
 APP.load = function ( cocktails  ) {
 	var cocktailsInGame = cocktails,

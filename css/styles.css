@@ -370,6 +370,9 @@ body {
   background: linear-gradient(230deg, #4bcf93, #4b79cf, #a24bcf);
   background-size: 400% 400%; }
 
+.is-hidden {
+  display: none; }
+
 .container {
   display: -webkit-box;
   display: -webkit-flex;

@@ -3,8 +3,28 @@ function Cocktail( name, ingredients, recipeURL ) {
 	this.ingredients = ingredients;
 	this.url = recipeURL;
 }
-Cocktail.prototype.hasIngredients = function hasIngredients( userIngredients ) {
-	//check if userIngredients match this cocktail ingredients
+Cocktail.prototype.getResult = function getResult( userIngred ) {
+		var correctIngred = [],
+			incorrectIngred = [],
+			quizIngred,
+			diff;
+
+		quizIngred = this.makeIngredList();
+		userIngred.forEach(function(el) {
+			if ( $.inArray(el, quizIngred) === -1  ) {
+				incorrectIngred.push(el);
+			} else {
+				correctIngred.push(el);
+			}
+		});			
+
+		diff = userIngred.length - quizIngred.length;
+
+		return {
+			diff: diff,
+			correctGuesses: correctIngred,
+			incorrectGuesses: incorrectIngred
+		};
 };
 Cocktail.prototype.makeIngredList = function makeIngredList( ingredList ) {
 	var ingredList = ingredList || [];
