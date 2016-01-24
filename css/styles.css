@@ -368,7 +368,8 @@ html {
 body {
   background: -webkit-linear-gradient(220deg, #4bcf93, #4b79cf, #a24bcf);
   background: linear-gradient(230deg, #4bcf93, #4b79cf, #a24bcf);
-  background-size: 400% 400%; }
+  background-size: 400% 400%;
+  height: 100%; }
 
 .is-hidden {
   display: none; }
