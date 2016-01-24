@@ -45,8 +45,28 @@
 .quiz__mix-info--theme1 {
 	h3 {
 		font-weight: 400;
+		color: rgba($white, 0.5);
+	}
+	h1 {
+		font-size: em(38px);
+		line-height: em(38px, 38px);
+	}
+	ul.cocktail-ingredients {
+		font-size: em(24px);
 	}
 }
 .quiz__mix-info {
 	@extend .quiz__mix-info--theme1;
+	h3, h1 {
+		margin: 0;
+	}
+	ul.cocktail-ingredients {
+		margin-top: em(16px, 24px);
+		min-height: em(135px, 24px);
+	}
 }
+
+
+
+
+

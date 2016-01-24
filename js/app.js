@@ -33,7 +33,7 @@ APP.handle = function( $ ) {
 		//on additional click, remove from
 		var $button = $(this), 
 			ingredient = $button.text(),
-			$cocktailIngredUL = $('.mix-info .cocktail-ingredients');
+			$cocktailIngredUL = $('.quiz__mix-info .cocktail-ingredients');
 
 		if ( !$button.hasClass('is-active') ) {	
 			$cocktailIngredUL.append('<li>' + ingredient + '</li>');
@@ -52,15 +52,15 @@ APP.handle = function( $ ) {
 		var str = "";
 		
 		if ( ingreds.length === 1 ) {
-			str = " " + ingreds[0];
+			str = ' "' + ingreds[0] + '"';
 			return str;
 		}
 
 		ingreds.forEach(function(el, i) {
 			if ( i === ingreds.length - 1 ) { 
-				str += " and " + el;
+				str += ' and "' + el + '"';
 			} else {
-				str += " " + el + ",";
+				str += ' "' + el + '",';
 			}
 		});
 		return str;
@@ -198,4 +198,5 @@ $(document).ready(function() {
 	APP.load.createIngredButtons();
 	APP.load.pickCocktail();
 	$('button.mix').click(APP.handle.mixButtonClick);
+	log(APP.load.getSelectedCocktail().makeIngredList());
 });
