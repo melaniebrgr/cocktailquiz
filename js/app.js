@@ -109,12 +109,17 @@ APP.handle = function( $ ) {
 		}
 	}
 
+	function updateView_corresponce() {
+		//
+	}
+
 	function publicMixButtonClick() {
 		//get the selected cocktail
 		//get user selected ingredients
 		//compare ingredients of selected cocktail with user's
 		//get user feedback
 		//display user feedback
+		//if the user is correct, do stuff
 
 		var quizCocktail = APP.load.getSelectedCocktail(),
 			userIngreds = [],
@@ -128,6 +133,9 @@ APP.handle = function( $ ) {
 		result = quizCocktail.getResult( userIngreds );
 		feedback = createFeedback( result );
 		$('.cocktail-feedback').removeClass('is-hidden').text(feedback);
+		if ( result.diff === 0 && result.incorrectGuesses.length === 0 ) {
+			updateView_corresponce();
+		}
 	}
 
 	return {
@@ -139,6 +147,10 @@ APP.handle = function( $ ) {
 APP.load = function ( cocktails  ) {
 	var cocktailsInGame = cocktails,
 		selectedCocktail;
+
+	function publicSetTotalQues() {
+		$('.total-ques').text( cocktails.length );
+	}
 
 	function listIngredients( cocktailsArr ) {
 		var ingredList = [];
@@ -175,12 +187,14 @@ APP.load = function ( cocktails  ) {
 	return {
 		createIngredButtons: publicCreateIngredButtons,
 		pickCocktail: publicPickCocktail,
-		getSelectedCocktail: publicGetSelectedCocktail
+		getSelectedCocktail: publicGetSelectedCocktail,
+		setTotalQues: publicSetTotalQues
 	};
 	
 }( cocktails );
 
 $(document).ready(function() {
+	APP.load.setTotalQues();
 	APP.load.createIngredButtons();
 	APP.load.pickCocktail();
 	$('button.mix').click(APP.handle.mixButtonClick);
