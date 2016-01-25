@@ -29,7 +29,7 @@ APP.util = function( $ ) {
 
 
 
-APP.handle = function( $ ) {
+APP.handle = function() {
 
 	function publicIngredButtonClick() {
 		//on click get the text of the button
@@ -130,26 +130,40 @@ APP.handle = function( $ ) {
 
 		//check if user has correct answer
 		if ( result.diff === 0 && result.incorrectGuesses.length === 0 ) {
+			//increment score
+			//add link to success message
+			//hide mix button, skip button
+			//show New drink button -> reuse function for Skip button
 			updateTotal();
 			$('.cocktail-feedback').append( cocktail.createLinkToRecipe() );
+			$('button.skip').addClass('is-hidden');
+			$('button.mix').addClass('is-hidden');
+			$('button.new-drink').removeClass('is-hidden');
 		}
 	}
 
 	function publicSkipButtonClick() {
-		// get a new cocktail
+		// get the current cocktail
+		// set a new cocktail
+		// add old cocktail back to the cocktail array
 		// clear ingredients in mix info
-		// deactivate all buttons
+		// deactivate all ingredient buttons
+		var prevCocktail = APP.init.getSelectedCocktail();
+		APP.init.pickCocktail();
+		APP.init.addToCocktailsInGame( prevCocktail );
+		APP.init.reset();
 	}
 
 	return {
 		ingredButtonClick: publicIngredButtonClick,
-		mixButtonClick: publicMixButtonClick
+		mixButtonClick: publicMixButtonClick,
+		skipButtonClick: publicSkipButtonClick
 	};
-}( jQuery );
+}();
 
 APP.init = function ( cocktails  ) {
-	var cocktailsInGame = cocktails,
-		selectedCocktail;
+	var cocktailsInGame = cocktails;
+	var selectedCocktail;
 
 	function publicSetTotalQues() {
 		$('.total-ques').text( cocktails.length );
@@ -185,18 +199,30 @@ APP.init = function ( cocktails  ) {
 		//update the view
 		selectedCocktail = newCocktail( cocktailsInGame )[0];
 		$('.quiz__mix-info .cocktail-name').text( selectedCocktail.name );
-		log(selectedCocktail.createLinkToRecipe());
+		log(selectedCocktail.makeIngredList());
 	}
 
 	function publicGetSelectedCocktail() {
 		return selectedCocktail;
+	}
+
+	function publicAddToCocktailsInGame(el) {
+		cocktailsInGame.push(el);
+	}
+
+	function publicReset() {
+		$('.quiz__mix-info .cocktail-ingredients').empty();
+		$('.cocktail-feedback').addClass('is-hidden').empty();
+		$('.answers button.is-active').removeClass('is-active');
 	}
 	
 	return {
 		createIngredButtons: publicCreateIngredButtons,
 		pickCocktail: publicPickCocktail,
 		getSelectedCocktail: publicGetSelectedCocktail,
-		setTotalQues: publicSetTotalQues
+		setTotalQues: publicSetTotalQues,
+		addToCocktailsInGame: publicAddToCocktailsInGame,
+		reset: publicReset
 	};
 	
 }( cocktails );
@@ -206,5 +232,6 @@ $(document).ready(function() {
 	APP.init.createIngredButtons();
 	APP.init.pickCocktail();
 	$('button.mix').click(APP.handle.mixButtonClick);
-	log(APP.init.getSelectedCocktail().makeIngredList());
+	$('button.skip').click(APP.handle.skipButtonClick);
+	$('button.new-drink').click(APP.handle.skipButtonClick);
 });

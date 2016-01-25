@@ -392,7 +392,8 @@ body {
 
 .score--theme1, .score {
   border: 1px solid rgba(255, 255, 255, 0.5);
-  border-radius: 50%; }
+  border-radius: 50%;
+  color: rgba(255, 255, 255, 0.5); }
   .score--theme1 span span.correct-ans, .score span span.correct-ans, .score--theme1 span span.total-ques, .score span span.total-ques {
     font-size: 1.25em;
     font-weight: 400; }
