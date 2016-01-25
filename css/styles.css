@@ -391,9 +391,9 @@ body {
   height: 100%; }
 
 .score--theme1, .score {
-  border: 1px solid rgba(255, 255, 255, 0.5);
+  border: 1px solid #fff;
   border-radius: 50%;
-  color: rgba(255, 255, 255, 0.5); }
+  color: #fff; }
   .score--theme1 span span.correct-ans, .score span span.correct-ans, .score--theme1 span span.total-ques, .score span span.total-ques {
     font-size: 1.25em;
     font-weight: 400; }
@@ -428,7 +428,7 @@ body {
             justify-content: center;
     min-width: 100%; }
     .score > span:first-child {
-      border-bottom: 1px solid rgba(255, 255, 255, 0.5); }
+      border-bottom: 1px solid #fff; }
   .score span span.correct-ans, .score span span.total-ques {
     -webkit-transform: rotate(45deg);
         -ms-transform: rotate(45deg);

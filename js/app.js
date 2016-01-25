@@ -4,9 +4,9 @@ function log(m) {
 
 var APP = APP || {};
 
-APP.util = function( $ ) {
+APP.util = function() {
 
-	function publicUniq( inputArr ) {
+	function publicUniq(inputArr) {
 	    var resultArr = [];
 	    $.each(inputArr, function(i, el) {
 	        if ($.inArray(el, resultArr) === -1) { resultArr.push(el); }
@@ -14,18 +14,30 @@ APP.util = function( $ ) {
 	    return resultArr;
 	}
 
-	function publicRanIndex( array ) {
+	function publicRanIndex(array) {
 		return Math.floor(Math.random()*array.length);
 	}
 
-	//need a function for alphabetical sorting
+	function publicAlphabetically(a, b){
+		var nameA = a.toLowerCase(); 
+		var	nameB = b.toLowerCase();
+
+		if (nameA < nameB) {
+			return -1;
+		}
+		if (nameA > nameB) {
+			return 1;
+		}
+		return 0;
+	}
 
 	return {
 		uniq: publicUniq,
-		ranIndex: publicRanIndex
+		ranIndex: publicRanIndex,
+		alphabetically: publicAlphabetically
 	};
 
-}( jQuery );
+}();
 
 
 
@@ -181,7 +193,7 @@ APP.init = function ( cocktails  ) {
 		cocktailsArr.forEach(function(el) {
 			ingredList = el.makeIngredList( ingredList );
 		});
-		return APP.util.uniq( ingredList ).sort();
+		return APP.util.uniq( ingredList ).sort(APP.util.alphabetically);
 	}
 
 	function publicCreateIngredButtons() {
