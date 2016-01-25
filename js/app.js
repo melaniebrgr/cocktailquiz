@@ -18,12 +18,16 @@ APP.util = function( $ ) {
 		return Math.floor(Math.random()*array.length);
 	}
 
+	//need a function for alphabetical sorting
+
 	return {
 		uniq: publicUniq,
 		ranIndex: publicRanIndex
 	};
 
 }( jQuery );
+
+
 
 APP.handle = function( $ ) {
 
@@ -42,10 +46,6 @@ APP.handle = function( $ ) {
 			$cocktailIngredUL.find( 'li:contains("' + ingredient + '")' ).remove();
 			$button.removeClass('is-active');
 		}
-	}
-
-	function getAmounts() {
-		return " Amounts here";
 	}
 
 	function createIngredStr( ingreds ) {
@@ -67,21 +67,15 @@ APP.handle = function( $ ) {
 	}
 
 	function createFeedback( result ) {
-		// If incorrect:
-		// 	which ingredients are correct, if any
-		// 	which are incorrect, if any
-		// 	if there are too many
-		// 	if there are too few
-		// If correct:
-		// 	congratulations, the amounts for each ingredient, and the url for more information
+		var cocktail = APP.init.getSelectedCocktail();
 
 		//no ingredients selected
 		if ( result.correctGuesses.length === 0 && result.incorrectGuesses.length === 0 ) {
 			return "Anyone can mix Nitrogen, Oxygen, and Argon, but air won't get you drunk – why not pick some ingredients?";
 
 		//the right number of ingredients and all the right ones
-		} else if ( result.diff === 0 && result.incorrectGuesses.length === 0 ) { 
-			return "Good mixing! You're a bartender in the making!" + getAmounts();
+		} else if ( result.diff === 0 && result.incorrectGuesses.length === 0 ) {
+			return "That's right! You're going to need" + cocktail.createAmountAndInggredStr() + ". Learn more about mixing a ";
 
 		//the right number of ingredients but none of the right ones
 		} else if ( result.diff === 0 && result.correctGuesses.length === 0 ) {
@@ -109,8 +103,9 @@ APP.handle = function( $ ) {
 		}
 	}
 
-	function updateView_corresponce() {
-		//
+	function updateTotal() {
+		var total = $('.score .correct-ans');
+		total.text(parseInt(total.text()) + 1);
 	}
 
 	function publicMixButtonClick() {
@@ -119,9 +114,8 @@ APP.handle = function( $ ) {
 		//compare ingredients of selected cocktail with user's
 		//get user feedback
 		//display user feedback
-		//if the user is correct, do stuff
 
-		var quizCocktail = APP.load.getSelectedCocktail(),
+		var cocktail = APP.init.getSelectedCocktail(),
 			userIngreds = [],
 			result,
 			feedback;
@@ -130,12 +124,21 @@ APP.handle = function( $ ) {
 			userIngreds.push( $(el).text() );
 		});
 
-		result = quizCocktail.getResult( userIngreds );
+		result = cocktail.getResult( userIngreds );
 		feedback = createFeedback( result );
 		$('.cocktail-feedback').removeClass('is-hidden').text(feedback);
+
+		//check if user has correct answer
 		if ( result.diff === 0 && result.incorrectGuesses.length === 0 ) {
-			updateView_corresponce();
+			updateTotal();
+			$('.cocktail-feedback').append( cocktail.createLinkToRecipe() );
 		}
+	}
+
+	function publicSkipButtonClick() {
+		// get a new cocktail
+		// clear ingredients in mix info
+		// deactivate all buttons
 	}
 
 	return {
@@ -144,7 +147,7 @@ APP.handle = function( $ ) {
 	};
 }( jQuery );
 
-APP.load = function ( cocktails  ) {
+APP.init = function ( cocktails  ) {
 	var cocktailsInGame = cocktails,
 		selectedCocktail;
 
@@ -152,7 +155,7 @@ APP.load = function ( cocktails  ) {
 		$('.total-ques').text( cocktails.length );
 	}
 
-	function listIngredients( cocktailsArr ) {
+	function listAllIngredients( cocktailsArr ) {
 		var ingredList = [];
 		cocktailsArr.forEach(function(el) {
 			ingredList = el.makeIngredList( ingredList );
@@ -161,7 +164,7 @@ APP.load = function ( cocktails  ) {
 	}
 
 	function publicCreateIngredButtons() {
-		var ingredients = listIngredients( cocktails ),
+		var ingredients = listAllIngredients( cocktails ),
 			$answersSection = $('.answers');
 		ingredients.forEach(function(el) {
 			var $button = $("<button>" + el + "</button>");
@@ -171,13 +174,18 @@ APP.load = function ( cocktails  ) {
 	}
 
 	function newCocktail( cocktailsInGame ) {
+		//get a random index value given the array passed as an argument
+		//remove the element from the array and return it
 		var index = APP.util.ranIndex( cocktailsInGame );
 		return cocktailsInGame.splice( index, 1 );
 	}
 
 	function publicPickCocktail() {
+		//set the selectedCoctail private variable
+		//update the view
 		selectedCocktail = newCocktail( cocktailsInGame )[0];
 		$('.quiz__mix-info .cocktail-name').text( selectedCocktail.name );
+		log(selectedCocktail.createLinkToRecipe());
 	}
 
 	function publicGetSelectedCocktail() {
@@ -194,9 +202,9 @@ APP.load = function ( cocktails  ) {
 }( cocktails );
 
 $(document).ready(function() {
-	APP.load.setTotalQues();
-	APP.load.createIngredButtons();
-	APP.load.pickCocktail();
+	APP.init.setTotalQues();
+	APP.init.createIngredButtons();
+	APP.init.pickCocktail();
 	$('button.mix').click(APP.handle.mixButtonClick);
-	log(APP.load.getSelectedCocktail().makeIngredList());
+	log(APP.init.getSelectedCocktail().makeIngredList());
 });

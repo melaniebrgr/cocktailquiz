@@ -33,6 +33,32 @@ Cocktail.prototype.makeIngredList = function makeIngredList( ingredList ) {
 	});
 	return ingredList;
 };
+Cocktail.prototype.createAmountAndInggredStr = function createAmountAndInggredStr() {
+	//compose ingredient amounts and url into a html string that is added to the createFeedback() basic success message
+	//iterate through the ingredients array
+	//for each object add, for example, " 2 oz bourbon," to the growing string
+	var str = "";
+
+	if ( this.ingredients.length === 1 ) {
+		//this drink is pretty shitty
+		str += " " + this.ingredients.amount + " " + this.ingredients.ingredient;
+		return str;
+	}
+
+	this.ingredients.forEach(function(el, i, arr) {
+		var howMuchOf = "";
+		if ( i === arr.length - 1 ) { 
+			howMuchOf = " and " + el.amount + " " + el.ingredient;
+		} else {
+			howMuchOf = " " + el.amount + " " + el.ingredient + ",";
+		}
+		str += howMuchOf;
+	});
+	return str;
+};
+Cocktail.prototype.createLinkToRecipe = function createLinkToRecipe() {
+	return $('<a></a>').attr('href', this.url).text( this.name );
+};
 
 var oldFashioned = new Cocktail("Old Fashioned", [
 	{ amount: "2 oz", ingredient: "bourbon" },
