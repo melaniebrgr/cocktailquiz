@@ -95,7 +95,7 @@ APP.handle = function() {
 
 		//too few ingredients and none are the right ones
 		} else if ( result.diff < 0 && result.correctGuesses.length === 0 ) {
-			return "It's missing, well, everything. You have " + Math.abs(result.diff) + " too few ingredients, and none of the ones you've picked are in this cocktail.";
+			return "It's missing, well, everything. You have " + Math.abs(result.diff) + " too few ingredients, and none of the ones you've picked are in a " + cocktail.name + ".";
 		
 		//too few ingredients but some are the right ones
 		} else if ( result.diff < 0 && result.correctGuesses.length > 0 ) {
@@ -137,7 +137,7 @@ APP.handle = function() {
 			updateTotal();
 			$('.cocktail-feedback').append( cocktail.createLinkToRecipe() );
 			$('button.skip').addClass('is-hidden');
-			$('button.mix').addClass('is-hidden');
+			$(this).addClass('is-hidden');
 			$('button.new-drink').removeClass('is-hidden');
 		}
 	}
@@ -146,18 +146,25 @@ APP.handle = function() {
 		// get the current cocktail
 		// set a new cocktail
 		// add old cocktail back to the cocktail array
-		// clear ingredients in mix info
-		// deactivate all ingredient buttons
 		var prevCocktail = APP.init.getSelectedCocktail();
 		APP.init.pickCocktail();
 		APP.init.addToCocktailsInGame( prevCocktail );
 		APP.init.reset();
 	}
 
+	function publicNewDrinkButtonClick() {
+		$(this).addClass('is-hidden');
+		$('button.skip').removeClass('is-hidden');
+		$('button.mix').removeClass('is-hidden');
+		APP.init.reset();
+		APP.init.pickCocktail();
+	}
+
 	return {
 		ingredButtonClick: publicIngredButtonClick,
 		mixButtonClick: publicMixButtonClick,
-		skipButtonClick: publicSkipButtonClick
+		skipButtonClick: publicSkipButtonClick,
+		newDrinkButtonClick: publicNewDrinkButtonClick
 	};
 }();
 
@@ -195,11 +202,11 @@ APP.init = function ( cocktails  ) {
 	}
 
 	function publicPickCocktail() {
-		//set the selectedCoctail private variable
-		//update the view
+		//set the selectedCocktail private variable
+		//update the mix-info
 		selectedCocktail = newCocktail( cocktailsInGame )[0];
 		$('.quiz__mix-info .cocktail-name').text( selectedCocktail.name );
-		log(selectedCocktail.makeIngredList());
+		log(selectedCocktail.makeIngredList()); //so you can cheat ;)
 	}
 
 	function publicGetSelectedCocktail() {
@@ -211,9 +218,17 @@ APP.init = function ( cocktails  ) {
 	}
 
 	function publicReset() {
+		// clear ingredients in mix info and feedback
+		// deactivate all ingredient buttons
 		$('.quiz__mix-info .cocktail-ingredients').empty();
 		$('.cocktail-feedback').addClass('is-hidden').empty();
 		$('.answers button.is-active').removeClass('is-active');
+	}
+	function publicReinit() {
+		cocktailsInGame = cocktails;
+		$('.score .correct-ans').text('0');
+		publicReset();
+		publicPickCocktail();
 	}
 	
 	return {
@@ -222,7 +237,8 @@ APP.init = function ( cocktails  ) {
 		getSelectedCocktail: publicGetSelectedCocktail,
 		setTotalQues: publicSetTotalQues,
 		addToCocktailsInGame: publicAddToCocktailsInGame,
-		reset: publicReset
+		reset: publicReset,
+		reinit: publicReinit
 	};
 	
 }( cocktails );
@@ -233,5 +249,6 @@ $(document).ready(function() {
 	APP.init.pickCocktail();
 	$('button.mix').click(APP.handle.mixButtonClick);
 	$('button.skip').click(APP.handle.skipButtonClick);
-	$('button.new-drink').click(APP.handle.skipButtonClick);
+	$('button.new-drink').click(APP.handle.newDrinkButtonClick);
+	$('a.reinit').click(APP.init.reinit);
 });
