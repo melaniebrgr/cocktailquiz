@@ -180,12 +180,13 @@ APP.handle = function() {
 	};
 }();
 
-APP.init = function ( cocktails  ) {
-	var cocktailsInGame = cocktails;
+
+APP.init = function () {
+	var cocktailsInGame = APP.data.cocktails;
 	var selectedCocktail;
 
 	function publicSetTotalQues() {
-		$('.total-ques').text( cocktails.length );
+		$('.total-ques').text( APP.data.cocktails.length );
 	}
 
 	function listAllIngredients( cocktailsArr ) {
@@ -197,7 +198,7 @@ APP.init = function ( cocktails  ) {
 	}
 
 	function publicCreateIngredButtons() {
-		var ingredients = listAllIngredients( cocktails ),
+		var ingredients = listAllIngredients( APP.data.cocktails ),
 			$answersSection = $('.answers');
 		ingredients.forEach(function(el) {
 			var $button = $("<button>" + el + "</button>");
@@ -237,7 +238,7 @@ APP.init = function ( cocktails  ) {
 		$('.answers button.is-active').removeClass('is-active');
 	}
 	function publicReinit() {
-		cocktailsInGame = cocktails;
+		cocktailsInGame = APP.data.cocktails;
 		$('.score .correct-ans').text('0');
 		publicReset();
 		publicPickCocktail();
@@ -253,7 +254,7 @@ APP.init = function ( cocktails  ) {
 		reinit: publicReinit
 	};
 	
-}( cocktails );
+}();
 
 $(document).ready(function() {
 	APP.init.setTotalQues();

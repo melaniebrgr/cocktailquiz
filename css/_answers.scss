@@ -2,6 +2,8 @@
 //for radial gradient
 //background-image: radial-gradient(right, #f2f2f2, #ffffff 80%); 
 .answers {
+	background: -moz-radial-gradient(left, rgba($white, 0.1), rgba($white, 0));
+    background-image: -webkit-radial-gradient(left, rgba($white, 0.1), rgba($white, 0));
 	padding: em(24px);
 	padding-right: 2.5em;
 	display: flex;

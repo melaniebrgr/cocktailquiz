@@ -9,6 +9,8 @@ button {
 	max-width: 210px;
 	padding-left: em(24px);
 	padding-right: em(24px);
+	transition: border $transition,
+		background-color $transition;
 
 	&:hover {
 		// -webkit-text-fill-color: transparent; 

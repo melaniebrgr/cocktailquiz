@@ -3,6 +3,7 @@ $browser-context: 16px;
 $white: #fff;
 $black: #000;
 $blue: #5370CA;
+$transition: 0.05s ease-in-out;
 
 //functions
 @function em($px, $context: $browser-context) {

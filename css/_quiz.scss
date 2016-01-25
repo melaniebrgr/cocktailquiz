@@ -1,7 +1,9 @@
 .quiz--theme1 {
-	background-size: 400% 400%;
+	background: -moz-radial-gradient(right, rgba($black, 0.1), rgba($black, 0));
+	background-image: -webkit-radial-gradient(right, rgba($black, 0.1), rgba($black, 0));
+	background-image: radial-gradient(right, rgba($black, 0.1), rgba($black, 0));
 	border-right: 1px solid rgba($white, 0.05);
-	box-shadow: inset -27px 0 45px -19px rgba($black, 0.05);
+	// box-shadow: inset -27px 0 45px -19px rgba($black, 0.05);
 }
 .quiz {
 	@extend .quiz--theme1;
@@ -63,6 +65,7 @@
 	ul.cocktail-ingredients {
 		margin-top: em(16px, 24px);
 		min-height: em(135px, 24px);
+		transition: height 0.2s ease-in-out;
 	}
 }
 
