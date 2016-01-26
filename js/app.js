@@ -1,9 +1,11 @@
+var debug = true,
+	cheatSheet = cheatSheet || {};
+
 function log(m) {
 	console.log(m);
 }
 
 var APP = APP || {};
-
 APP.util = function() {
 
 	function publicUniq(inputArr) {
@@ -144,8 +146,8 @@ APP.handle = function() {
 		if ( result.diff === 0 && result.incorrectGuesses.length === 0 ) {
 			//increment score
 			//add link to success message
-			//hide mix button, skip button
-			//show New drink button -> reuse function for Skip button
+			//hide 'Mix' button, 'Skip' button
+			//show 'New drink' button
 			updateTotal();
 			$('.cocktail-feedback').append( cocktail.createLinkToRecipe() );
 			$('button.skip').addClass('is-hidden');
@@ -219,7 +221,7 @@ APP.init = function () {
 		//update the mix-info
 		selectedCocktail = newCocktail( cocktailsInGame )[0];
 		$('.quiz__mix-info .cocktail-name').text( selectedCocktail.name );
-		log(selectedCocktail.makeIngredList()); //so you can cheat ;)
+		cheatSheet.ingreds = selectedCocktail.makeIngredList();
 	}
 
 	function publicGetSelectedCocktail() {
@@ -264,4 +266,5 @@ $(document).ready(function() {
 	$('button.skip').click(APP.handle.skipButtonClick);
 	$('button.new-drink').click(APP.handle.newDrinkButtonClick);
 	$('a.reinit').click(APP.init.reinit);
+	if(debug){ log(cheatSheet); }
 });

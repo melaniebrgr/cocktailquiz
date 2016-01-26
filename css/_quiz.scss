@@ -1,9 +1,6 @@
 .quiz--theme1 {
-	background: -moz-radial-gradient(right, rgba($black, 0.1), rgba($black, 0));
-	background-image: -webkit-radial-gradient(right, rgba($black, 0.1), rgba($black, 0));
-	background-image: radial-gradient(right, rgba($black, 0.1), rgba($black, 0));
+	@include radial-gradient(right, $black);
 	border-right: 1px solid rgba($white, 0.05);
-	// box-shadow: inset -27px 0 45px -19px rgba($black, 0.05);
 }
 .quiz {
 	@extend .quiz--theme1;
@@ -33,6 +30,7 @@
 		a {
 			color: inherit;
 			text-decoration: none;
+			transition: color $transition;
 
 			&:hover {
 				color: rgba($white, 1);

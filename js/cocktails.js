@@ -61,7 +61,8 @@ APP.data = function() {
 		return str;
 	};
 	Cocktail.prototype.createLinkToRecipe = function createLinkToRecipe() {
-		return $('<a></a>').attr('href', this.url).text( this.name );
+		//TIL appending DOM strings with jQuery turns them into DOM nodes.
+		return "<a href='" + this.url + "' target='_blank'>" + this.name + "</a>.";
 	};
 
 	var oldFashioned = new Cocktail("Old Fashioned", [

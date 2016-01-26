@@ -11,3 +11,10 @@ $transition: 0.05s ease-in-out;
 	@if ( unitless($context) ) { $context: $context * 1px; }
 	@return $px / $context * 1em;
 }
+
+//mixins
+@mixin radial-gradient($location, $color) {
+	background: -moz-radial-gradient($location, rgba($color, 0.1), rgba($color, 0));
+	background-image: -webkit-radial-gradient($location, rgba($color, 0.1), rgba($color, 0));
+	background-image: radial-gradient($location, rgba($color, 0.1), rgba($color, 0));
+}
