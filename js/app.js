@@ -6,6 +6,7 @@ function log(m) {
 }
 
 var APP = APP || {};
+
 APP.util = function() {
 
 	function publicUniq(inputArr) {
@@ -57,7 +58,7 @@ APP.handle = function() {
 			$cocktailIngredUL.append('<li>' + ingredient + '</li>');
 			$button.addClass('is-active');
 		} else {
-			$cocktailIngredUL.find( 'li:contains("' + ingredient + '")' ).remove();
+			$cocktailIngredUL.find( 'li:contains("' + ingredient + '")' ).first().remove(); //otherwise 'lemon juice' can be removed when you only mean to remove 'lemon'
 			$button.removeClass('is-active');
 		}
 	}
