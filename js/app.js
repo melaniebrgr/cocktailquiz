@@ -58,7 +58,11 @@ APP.handle = function() {
 			$cocktailIngredUL.append('<li>' + ingredient + '</li>');
 			$button.addClass('is-active');
 		} else {
-			$cocktailIngredUL.find( 'li:contains("' + ingredient + '")' ).first().remove(); //otherwise 'lemon juice' can be removed when you only mean to remove 'lemon'
+
+			$cocktailIngredUL.find( 'li:contains("' + ingredient + '")' ).each(function() { 
+				if ( $(this).text() === ingredient ) 
+					$(this).remove();
+			});
 			$button.removeClass('is-active');
 		}
 	}

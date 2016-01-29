@@ -1,7 +1,7 @@
 var APP = APP || {};
 
 APP.data = function() {
-		var oldFashioned = new APP.class.Cocktail("Old Fashioned", [
+	var oldFashioned = new APP.class.Cocktail("Old Fashioned", [
 		{ amount: "2 oz", ingredient: "bourbon" },
 		{ amount: "1 tsp", ingredient: "sugar" },
 		{ amount: "2-3 dashes of", ingredient: "Angostura bitters" }],
