@@ -1,5 +1,4 @@
-var debug = true,
-	cheatSheet = cheatSheet || {};
+var debug = true;
 
 function log(m) {
 	console.log(m);
@@ -226,7 +225,7 @@ APP.init = function () {
 		//update the mix-info
 		selectedCocktail = newCocktail( cocktailsInGame )[0];
 		$('.quiz__mix-info .cocktail-name').text( selectedCocktail.name );
-		cheatSheet.ingreds = selectedCocktail.makeIngredList();
+		if(debug) log(selectedCocktail.makeIngredList());
 	}
 
 	function publicGetSelectedCocktail() {
@@ -271,5 +270,4 @@ $(document).ready(function() {
 	$('button.skip').click(APP.handle.skipButtonClick);
 	$('button.new-drink').click(APP.handle.newDrinkButtonClick);
 	$('a.reinit').click(APP.init.reinit);
-	if(debug){ log(cheatSheet); }
 });
